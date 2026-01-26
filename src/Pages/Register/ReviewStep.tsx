@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRegisterForm } from "@/context/useRegisterForm";
 import { useSubmitRegistration } from "@/hooks/useSubmitRegistration";
+import { Loader2 } from "lucide-react";
+
 
 export default function ReviewStep() {
   const { state, setState } = useRegisterForm();
@@ -21,20 +23,9 @@ export default function ReviewStep() {
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-10 relative">
-      {/* Full-page loading overlay */}
       {loading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/50 backdrop-blur-sm">
-          <div className="loadership_NRCEJ">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+          <Loader2 className="h-16 w-16 animate-spin text-blue-600" />
         </div>
       )}
 
@@ -189,7 +180,14 @@ export default function ReviewStep() {
           onClick={submit}
           disabled={loading || !state.declarations.reviewConfirmed}
         >
-          {loading ? "Submitting..." : "Confirm & Submit"}
+          {loading ? (
+            <span className="flex items-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Submitting...
+            </span>
+          ) : (
+            "Confirm & Submit"
+          )}
         </Button>
       </div>
     </div>
