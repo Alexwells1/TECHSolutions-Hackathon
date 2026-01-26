@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { RegisterProvider } from "@/context/RegisterContext";
 import RegisterRoutes from "./Pages/Register/RegisterRoutes";
 import Success from "./Pages/Register/Success";

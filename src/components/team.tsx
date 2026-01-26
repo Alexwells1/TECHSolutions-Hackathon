@@ -1,5 +1,4 @@
-// components/Team/Team.tsx
-import React from "react";
+
 
 interface TeamMember {
   id: number;

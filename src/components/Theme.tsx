@@ -1,5 +1,3 @@
-// components/Theme/Theme.tsx
-import React from "react";
 
 interface FocusArea {
   id: number;

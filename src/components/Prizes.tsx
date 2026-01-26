@@ -1,5 +1,4 @@
-// components/Prizes/Prizes.tsx
-import React from "react";
+
 
 interface Prize {
   position: string;

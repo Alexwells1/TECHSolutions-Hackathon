@@ -1,5 +1,4 @@
-// components/Vision/Vision.tsx
-import React from "react";
+
 
 interface VisionProps {
   title?: string;
