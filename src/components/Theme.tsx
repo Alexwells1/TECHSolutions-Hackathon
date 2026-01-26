@@ -1,4 +1,3 @@
-
 interface FocusArea {
   id: number;
   title: string;
@@ -26,7 +25,7 @@ export default function Theme({
   focusAreas = DEFAULT_FOCUS_AREAS,
 }: ThemeProps) {
   return (
-    <section className="py-12 sm:py-16 md:py-20">
+    <section id="details-section" className="py-12 sm:py-16 md:py-20">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* SECTION TITLE */}
         <div className="text-center mb-8">
