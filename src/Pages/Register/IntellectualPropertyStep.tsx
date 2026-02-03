@@ -9,13 +9,17 @@ export default function IntellectualPropertyStep() {
   const navigate = useNavigate();
   const ip = state.declarations;
 
+  const disableNext = !ip.mouAgreed || !ip.signature;
+
   return (
     <StepLayout
       title="Intellectual Property & Exclusivity"
       onBack={() => navigate("/register/project")}
       onNext={() => navigate("/register/declarations")}
+      disableNext={disableNext}
+      warnOnReload
     >
-      {/* MOU Info */}
+
       <p className="text-sm mb-2">
         Have you read the FUNAAB TECHSolutions 2026 MOU and do all team members
         agree to its terms?
@@ -37,7 +41,6 @@ export default function IntellectualPropertyStep() {
         <label className="text-sm">Agree</label>
       </div>
 
-      {/* Digital Signature */}
       <div className="flex flex-col mb-4">
         <label htmlFor="signature" className="text-sm font-medium">
           Digital Signature (type full name of team leader to confirm
@@ -57,27 +60,6 @@ export default function IntellectualPropertyStep() {
         />
       </div>
 
-      {/* Date of submission */}
-      <div className="flex flex-col mb-4">
-        <label htmlFor="date" className="text-sm font-medium">
-          Date of Submission
-        </label>
-        <Input
-          id="date"
-          type="date"
-          placeholder="YYYY-MM-DD"
-          value={ip.date || ""}
-          onChange={(e) =>
-            setState((s) => ({
-              ...s,
-              declarations: { ...s.declarations, date: e.target.value },
-            }))
-          }
-          className="mt-1"
-        />
-      </div>
-
-      {/* Open MOU Link */}
       <p className="text-sm mt-2">
         <a href="/mou.pdf" target="_blank" className="underline text-blue-600">
           Open MOU

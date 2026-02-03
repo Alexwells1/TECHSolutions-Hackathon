@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -6,20 +6,40 @@ import { useRegisterForm } from "@/context/useRegisterForm";
 import { useSubmitRegistration } from "@/hooks/useSubmitRegistration";
 import { Loader2 } from "lucide-react";
 
-
 export default function ReviewStep() {
   const { state, setState } = useRegisterForm();
   const navigate = useNavigate();
   const { submit, loading } = useSubmitRegistration();
 
-  // Lock scroll when loading
   useEffect(() => {
-    if (loading) {
-      document.body.style.overflow = "hidden";
-    } else {
+    document.body.style.overflow = loading ? "hidden" : "auto";
+    return () => {
       document.body.style.overflow = "auto";
-    }
+    };
   }, [loading]);
+
+  const isValid = useMemo(() => {
+    if (!state.team.teamName) return false;
+    if (!state.team.leaderName) return false;
+    if (!state.team.email) return false;
+    if (!state.team.phone) return false;
+    if (!state.team.institution) return false;
+
+    if (state.members.length === 0) return false;
+    if (state.members.some((m) => !m.name || !m.email)) return false;
+
+    if (!state.project.title) return false;
+    if (!state.project.focusArea) return false;
+    if (!state.project.problem) return false;
+    if (!state.project.solution) return false;
+
+    if (!state.declarations.mouAgreed) return false;
+    if (!state.declarations.publicityConsent) return false;
+
+    if (!state.reviewConfirmed) return false;
+
+    return true;
+  }, [state]);
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-10 relative">
@@ -29,11 +49,10 @@ export default function ReviewStep() {
         </div>
       )}
 
-      <h1 className="text-2xl font-semibold">Review Submission</h1>
+      <h1 className="text-2xl font-semibold">Review Registration</h1>
 
-      {/* Team Info */}
       <section className="space-y-2 border-b pb-6">
-        <div className="flex items-center justify-between">
+        <div className="flex justify-between items-center">
           <h2 className="font-medium text-lg">Team Information</h2>
           <Button
             size="sm"
@@ -44,26 +63,24 @@ export default function ReviewStep() {
           </Button>
         </div>
         <p>
-          <span className="font-medium">Team Name:</span> {state.team.teamName}
+          <strong>Team Name:</strong> {state.team.teamName}
         </p>
         <p>
-          <span className="font-medium">Leader:</span> {state.team.leaderName}
+          <strong>Leader:</strong> {state.team.leaderName}
         </p>
         <p>
-          <span className="font-medium">Email:</span> {state.team.email}
+          <strong>Email:</strong> {state.team.email}
         </p>
         <p>
-          <span className="font-medium">Phone:</span> {state.team.phone}
+          <strong>Phone:</strong> {state.team.phone}
         </p>
         <p>
-          <span className="font-medium">Institution / Dept / Level:</span>{" "}
-          {state.team.institution}
+          <strong>Institution:</strong> {state.team.institution}
         </p>
       </section>
 
-      {/* Team Members */}
       <section className="space-y-2 border-b pb-6">
-        <div className="flex items-center justify-between">
+        <div className="flex justify-between items-center">
           <h2 className="font-medium text-lg">Team Members</h2>
           <Button
             size="sm"
@@ -74,21 +91,15 @@ export default function ReviewStep() {
           </Button>
         </div>
         {state.members.map((m, i) => (
-          <div key={i} className="mb-2">
-            <p>
-              <span className="font-medium">Full Name:</span> {m.name}
-            </p>
-            <p>
-              <span className="font-medium">Email:</span> {m.email}
-            </p>
-          </div>
+          <p key={i}>
+            <strong>{m.name}</strong>, {m.email}
+          </p>
         ))}
       </section>
 
-      {/* Project */}
       <section className="space-y-2 border-b pb-6">
-        <div className="flex items-center justify-between">
-          <h2 className="font-medium text-lg">Project</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="font-medium text-lg">Project Overview</h2>
           <Button
             size="sm"
             variant="outline"
@@ -98,77 +109,34 @@ export default function ReviewStep() {
           </Button>
         </div>
         <p>
-          <span className="font-medium">Title:</span> {state.project.title}
+          <strong>Title:</strong> {state.project.title}
         </p>
         <p>
-          <span className="font-medium">Focus Area:</span>{" "}
-          {state.project.focusArea}
+          <strong>Focus Area:</strong> {state.project.focusArea}
         </p>
         <p>
-          <span className="font-medium">Problem Statement:</span>{" "}
-          {state.project.problem}
+          <strong>Problem:</strong> {state.project.problem}
         </p>
         <p>
-          <span className="font-medium">Solution Summary:</span>{" "}
-          {state.project.solution}
-        </p>
-        <p>
-          <span className="font-medium">Technologies:</span>{" "}
-          {state.project.technologies}
-        </p>
-        <p>
-          <span className="font-medium">Expected MVP Features:</span>
-        </p>
-        <ul className="list-disc list-inside ml-4">
-          {state.project.features.map((f, i) => (
-            <li key={i}>{f}</li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Declarations & Permissions */}
-      <section className="space-y-2 border-b pb-6">
-        <div className="flex items-center justify-between">
-          <h2 className="font-medium text-lg">Declarations & Permissions</h2>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={() => navigate("/register/declarations")}
-          >
-            Edit
-          </Button>
-        </div>
-        <p>
-          <span className="font-medium">MOU Agreed:</span>{" "}
-          {state.declarations.mouAgreed ? "Yes" : "No"}
-        </p>
-        <p>
-          <span className="font-medium">Publicity Consent:</span>{" "}
-          {state.declarations.publicityConsent ? "Yes" : "No"}
-        </p>
-        <p>
-          <span className="font-medium">Conflict of Interest:</span>{" "}
-          {state.declarations.conflict || "None"}
+          <strong>Solution:</strong> {state.project.solution}
         </p>
       </section>
 
-      {/* Final Confirmation Checkbox */}
       <div className="flex items-start gap-3">
         <Checkbox
-          checked={state.declarations.reviewConfirmed || false}
+          checked={state.reviewConfirmed || false}
           onCheckedChange={(v) =>
             setState((s) => ({
               ...s,
-              declarations: { ...s.declarations, reviewConfirmed: Boolean(v) },
+              reviewConfirmed: Boolean(v),
             }))
           }
         />
         <label className="text-sm">
-          I have reviewed all information and confirm everything is correct
+          I confirm all registration details are correct
         </label>
       </div>
 
-      {/* Submit Buttons */}
       <div className="flex justify-between pt-6">
         <Button
           variant="outline"
@@ -176,17 +144,14 @@ export default function ReviewStep() {
         >
           Back
         </Button>
-        <Button
-          onClick={submit}
-          disabled={loading || !state.declarations.reviewConfirmed}
-        >
+        <Button onClick={submit} disabled={!isValid || loading}>
           {loading ? (
             <span className="flex items-center gap-2">
               <Loader2 className="h-4 w-4 animate-spin" />
-              Submitting...
+              Registering
             </span>
           ) : (
-            "Confirm & Submit"
+            "Confirm Registration"
           )}
         </Button>
       </div>

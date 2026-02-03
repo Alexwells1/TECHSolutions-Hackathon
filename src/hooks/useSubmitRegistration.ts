@@ -46,6 +46,7 @@ export function useSubmitRegistration() {
             phone: "",
             institution: "",
           },
+          reviewConfirmed: false,
           members: [{ name: "", email: "" }],
           project: {
             title: "",
@@ -56,7 +57,8 @@ export function useSubmitRegistration() {
             features: [],
             newFeature: "",
           },
-          declarations: {
+          declarations: { 
+            eligibilityConfirmed: false,
             mouAgreed: false,
             signature: "",
             publicityConsent: false,

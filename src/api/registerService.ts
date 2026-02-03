@@ -10,14 +10,6 @@ export interface ProjectInfo {
   focusArea: string;
   problem: string;
   solution: string;
-  technologies: string;
-  features: string[];
-}
-
-export interface Declarations {
-  mouAgreed: boolean;
-  publicityConsent: boolean;
-  conflict: string;
 }
 
 export interface RegistrationPayload {
@@ -27,7 +19,6 @@ export interface RegistrationPayload {
   teamLeaderEmail: string;
   members: TeamMember[];
   project: ProjectInfo;
-  declarations: Declarations;
 }
 
 export const submitRegistration = async (payload: RegistrationPayload) => {

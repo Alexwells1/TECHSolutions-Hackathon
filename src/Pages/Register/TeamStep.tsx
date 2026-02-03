@@ -2,15 +2,43 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { StepLayout } from "../../components/stepLayout";
 import { useRegisterForm } from "../../context/useRegisterForm";
+import { toast } from "sonner";
 
 export default function TeamStep() {
   const { state, setState } = useRegisterForm();
   const navigate = useNavigate();
 
+  const disableNext =
+    !state.team.teamName ||
+    !state.team.leaderName ||
+    !state.team.email ||
+    !state.team.phone;
+
+  const isValidEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const isValidPhone = (phone: string) => /^\d{10,15}$/.test(phone);
+
+  const handleNext = () => {
+    if (!state.team.email || !isValidEmail(state.team.email)) {
+      toast.error("Invalid email. Please enter a valid email address.");
+      return;
+    }
+
+    if (!state.team.phone || !isValidPhone(state.team.phone)) {
+      toast.error("Invalid phone number.");
+      return;
+    }
+
+    navigate("/register/members");
+  };
+
   return (
     <StepLayout
       title="Team & Primary Contact"
-      onNext={() => navigate("/register/members")}
+      onNext={handleNext}
+      disableNext={disableNext}
+      warnOnReload
     >
       <div className="mb-4">
         <label htmlFor="teamName" className="block mb-1">
@@ -83,18 +111,13 @@ export default function TeamStep() {
 
       <div className="mb-4">
         <label htmlFor="institution" className="block mb-1">
-          Institution / Department / Level
+          Institution
         </label>
         <Input
           id="institution"
           placeholder="Institution / Department / Level"
           value={state.team.institution}
-          onChange={(e) =>
-            setState((s) => ({
-              ...s,
-              team: { ...s.team, institution: e.target.value },
-            }))
-          }
+          readOnly
         />
       </div>
     </StepLayout>

@@ -78,7 +78,7 @@ export default function Hero({
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-2">
             <button
-              onClick={() => navigate("/register/team")}
+              onClick={() => navigate("/register")}
               className="w-full sm:w-auto px-6 sm:px-8 py-3 text-sm sm:text-base font-bold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
             >
               {registerButtonText}

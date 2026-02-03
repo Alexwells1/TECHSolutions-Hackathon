@@ -34,7 +34,7 @@ export default function Success() {
           <p className="text-gray-700 max-w-md">{message}</p>
         </>
       )}
-      <Button size="lg" onClick={() => navigate("/register/team")}>
+      <Button size="lg" onClick={() => navigate("/register")}>
         {success ? "Register Another Team" : "Try Again"}
       </Button>
     </div>

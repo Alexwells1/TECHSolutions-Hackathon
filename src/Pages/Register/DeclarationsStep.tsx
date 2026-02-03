@@ -9,13 +9,17 @@ export default function DeclarationsStep() {
   const navigate = useNavigate();
   const d = state.declarations;
 
+  const disableNext = !d.publicityConsent || !d.eligibilityConfirmed;
+
   return (
     <StepLayout
       title="Declarations & Permissions"
       onBack={() => navigate("/register/intellectual-property")}
       onNext={() => navigate("/register/review")}
+      disableNext={disableNext}
+      warnOnReload
     >
-      {/* Publicity Consent */}
+
       <div className="flex items-start gap-3 mb-4">
         <Checkbox
           checked={d.publicityConsent}
@@ -32,30 +36,25 @@ export default function DeclarationsStep() {
         </label>
       </div>
 
-      {/* MOU Agreement */}
       <div className="flex items-start gap-3 mb-4">
         <Checkbox
-          checked={d.mouAgreed}
+          checked={d.eligibilityConfirmed || false}
           onCheckedChange={(v) =>
             setState((s) => ({
               ...s,
-              declarations: { ...s.declarations, mouAgreed: Boolean(v) },
+              declarations: {
+                ...s.declarations,
+                eligibilityConfirmed: Boolean(v),
+              },
             }))
           }
         />
         <label className="text-sm">
-          I agree to the FUNAAB TECHSolutions 2026 MOU terms
-          <a
-            href="/mou.pdf"
-            target="_blank"
-            className="underline text-blue-600 ml-1"
-          >
-            (Open MOU)
-          </a>
+          I / We confirm that all team members are students of The Federal
+          University of Agriculture, Abeokuta (FUNAAB)
         </label>
       </div>
 
-      {/* Conflict of Interest */}
       <div className="flex flex-col mb-4">
         <label htmlFor="conflict" className="text-sm font-medium">
           Conflict of Interest Declaration (write "None" if none)

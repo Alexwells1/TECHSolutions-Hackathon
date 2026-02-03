@@ -25,6 +25,7 @@ export interface ProjectInfo {
 }
 
 export interface Declarations {
+  eligibilityConfirmed: boolean;
   mouAgreed: boolean;
   signature: string;
   publicityConsent: boolean;
@@ -34,6 +35,7 @@ export interface Declarations {
 }
 
 export interface RegisterState {
+  reviewConfirmed: boolean;
   team: TeamInfo;
   members: TeamMember[];
   project: ProjectInfo;
@@ -41,12 +43,13 @@ export interface RegisterState {
 }
 
 const defaultState: RegisterState = {
+  reviewConfirmed: false,
   team: {
     teamName: "",
     leaderName: "",
     email: "",
     phone: "",
-    institution: "",
+    institution: "Federal University of Agriculture, Abeokuta (FUNAAB)",
   },
   members: [{ name: "", email: "" }],
   project: {
@@ -59,6 +62,7 @@ const defaultState: RegisterState = {
     newFeature: "",
   },
   declarations: {
+    eligibilityConfirmed: false,
     mouAgreed: false,
     signature: "",
     publicityConsent: false,
