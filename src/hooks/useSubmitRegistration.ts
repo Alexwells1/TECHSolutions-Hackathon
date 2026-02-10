@@ -3,6 +3,7 @@ import { useRegisterForm } from "@/context/useRegisterForm";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { submitRegistration } from "@/api/registerService";
+import { defaultState } from "@/context/defaultState";
 
 export function useSubmitRegistration() {
   const { state, setState } = useRegisterForm();
@@ -38,33 +39,9 @@ export function useSubmitRegistration() {
         toast.success(backendMessage);
 
         // Reset form state manually
-        setState({
-          team: {
-            teamName: "",
-            leaderName: "",
-            email: "",
-            phone: "",
-            institution: "",
-          },
-          reviewConfirmed: false,
-          members: [{ name: "", email: "" }],
-          project: {
-            title: "",
-            focusArea: "",
-            problem: "",
-            solution: "",
-            technologies: "",
-            features: [],
-            newFeature: "",
-          },
-          declarations: { 
-            eligibilityConfirmed: false,
-            mouAgreed: false,
-            signature: "",
-            publicityConsent: false,
-            conflict: "none",
-          },
-        });
+
+        setState(defaultState)
+     
 
         navigate("/success", {
           state: {

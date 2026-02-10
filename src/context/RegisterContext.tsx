@@ -42,6 +42,7 @@ export interface RegisterState {
   declarations: Declarations;
 }
 
+
 const defaultState: RegisterState = {
   reviewConfirmed: false,
   team: {

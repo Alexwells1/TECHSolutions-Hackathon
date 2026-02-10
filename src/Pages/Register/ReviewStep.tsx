@@ -30,8 +30,6 @@ export default function ReviewStep() {
 
     if (!state.project.title) return false;
     if (!state.project.focusArea) return false;
-    if (!state.project.problem) return false;
-    if (!state.project.solution) return false;
 
     if (!state.declarations.mouAgreed) return false;
     if (!state.declarations.publicityConsent) return false;
@@ -57,7 +55,7 @@ export default function ReviewStep() {
           <Button
             size="sm"
             variant="outline"
-            onClick={() => navigate("/register/team")}
+            onClick={() => navigate("/register")}
           >
             Edit
           </Button>
@@ -113,12 +111,6 @@ export default function ReviewStep() {
         </p>
         <p>
           <strong>Focus Area:</strong> {state.project.focusArea}
-        </p>
-        <p>
-          <strong>Problem:</strong> {state.project.problem}
-        </p>
-        <p>
-          <strong>Solution:</strong> {state.project.solution}
         </p>
       </section>
 

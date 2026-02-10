@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -30,9 +29,7 @@ export default function ProjectStep() {
 
   const disableNext =
     !state.project.title ||
-    (!state.project.focusArea && state.project.focusArea !== "Other") ||
-    !state.project.problem ||
-    !state.project.solution;
+    (!state.project.focusArea && state.project.focusArea !== "Other");
 
   const isOther = focusAreas.includes(state.project.focusArea)
     ? state.project.focusArea === "Other"
@@ -99,30 +96,6 @@ export default function ProjectStep() {
             />
           </div>
         )}
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="problemStatement" className="block mb-1">
-          Problem Statement (max 200 words)
-        </label>
-        <Textarea
-          id="problemStatement"
-          placeholder="Problem Statement (max 200 words)"
-          value={state.project.problem}
-          onChange={(e) => setProject("problem", e.target.value)}
-        />
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="solutionSummary" className="block mb-1">
-          Solution Summary (max 300 words)
-        </label>
-        <Textarea
-          id="solutionSummary"
-          placeholder="Solution Summary (max 300 words)"
-          value={state.project.solution}
-          onChange={(e) => setProject("solution", e.target.value)}
-        />
       </div>
     </StepLayout>
   );
