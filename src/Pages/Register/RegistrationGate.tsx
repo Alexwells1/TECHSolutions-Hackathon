@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const OPEN_DATE_STRING =
-  import.meta.env.VITE_REGISTRATION_OPEN_DATE || "2026-02-10T20:00:00Z";
+  import.meta.env.VITE_REGISTRATION_OPEN_DATE || "2026-02-10T22:59:00Z";
 const OPEN_DATE = new Date(OPEN_DATE_STRING);
 const OPEN_TIME = OPEN_DATE.getTime();
 
