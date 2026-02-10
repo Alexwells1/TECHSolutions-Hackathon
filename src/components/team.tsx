@@ -1,4 +1,4 @@
-import adejimi from "../assets/Adejimi.jpg";
+import adejimi from "../assets/jimi.jpg";
 import damfe from "../assets/damife.jpeg";
 import Ifeoluwa from "../assets/Ifeoluwa.jpeg";
 import ali from "../assets/ali.jpeg";
