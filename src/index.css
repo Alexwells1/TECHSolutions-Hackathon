@@ -1,26 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap');
-
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  font-family: 'Rajdhani', sans-serif; 
+  font-family: "Rajdhani", sans-serif;
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Orbitron', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Orbitron", sans-serif;
   margin: 0;
 }
 
@@ -29,29 +36,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .font-space {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .font-sans {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
 }
 
 .font-heading {
-  font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: "Poppins", "Inter", system-ui, -apple-system, sans-serif;
 }
 
 .font-mono {
-  font-family: 'Roboto Mono', 'Courier New', monospace;
+  font-family: "Roboto Mono", "Courier New", monospace;
 }
 
 .font-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
 }
 
 @import "tailwindcss";
@@ -176,10 +182,14 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
 }
-
-
-
 
 .loadership_NRCEJ {
   display: flex;
@@ -266,7 +276,6 @@ body {
   }
 }
 
-
 .clip-diagonal-image {
   clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
 }
@@ -274,7 +283,6 @@ body {
 .clip-diagonal-accent {
   clip-path: polygon(8% 0, 14% 0, 4% 100%, 0 100%);
 }
-
 
 @media (max-width: 768px) {
   .clip-diagonal-image {
