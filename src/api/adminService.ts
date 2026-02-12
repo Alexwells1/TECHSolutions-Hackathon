@@ -1,8 +1,8 @@
 import type {
   LoginCredentials,
   LoginResponse,
-  IRegistrationSummary,
   IRegistration,
+  IRegistrationResponse,
 } from "../types/registration";
 import { api } from "./api";
 
@@ -31,8 +31,8 @@ export const login = async (
 };
 
 // Get all registrations
-export const getRegistrations = async (): Promise<IRegistrationSummary[]> => {
-  const response = await api.get<IRegistrationSummary[]>(
+export const getRegistrations = async (): Promise<IRegistrationResponse > => {
+  const response = await api.get<IRegistrationResponse>(
     "/admin/registrations"
   );
   return response.data;

@@ -1,10 +1,10 @@
 import { LoaderSkeleton } from "@/components/LoaderSkeleton";
 import { Table } from "@/components/Table";
 import { useRegistrations } from "@/hooks/useRegistrations";
-import type { IRegistrationSummary } from "@/types/registration";
 import { Error } from "@/components/Error";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import type { Data } from "@/types/registration";
 
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export const Dashboard: React.FC = () => {
   const columns = [
     {
       header: "Team Name",
-      accessor: (row: IRegistrationSummary) => (
+      accessor: (row: Data) => (
         <button
           onClick={() => navigate(`/admin/registrations/${row.id}`)}
           className="text-primary hover:text-primary-dark font-medium transition-colors"

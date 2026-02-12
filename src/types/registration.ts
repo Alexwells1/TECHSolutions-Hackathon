@@ -10,11 +10,14 @@ export interface IProject {
 }
 
 export interface IRegistrationSummary {
-  id: string;
-  teamName: string;
-  project: IProject;
   data: Data;
 }
+
+export interface IRegistrationResponse {
+  success: boolean;
+  data: Data[];
+}
+
 
 export interface Data {
   id: string;
