@@ -6,6 +6,9 @@ const OPEN_DATE_STRING =
 const OPEN_DATE = new Date(OPEN_DATE_STRING);
 const OPEN_TIME = OPEN_DATE.getTime();
 
+// New env variable to control if registration is active
+const REGISTRATION_OPEN = import.meta.env.VITE_REGISTRATION_OPEN === "no";
+
 export default function RegistrationGate() {
   const [now, setNow] = useState(() => Date.now());
 
@@ -16,6 +19,20 @@ export default function RegistrationGate() {
 
     return () => clearInterval(interval);
   }, []);
+
+  if (!REGISTRATION_OPEN) {
+    // Show registration ended screen
+    return (
+      <div className="h-[100dvh] w-full flex flex-col items-center justify-center px-3 sm:px-4 font-space bg-gray-100">
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
+          Registration Ended
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-700">
+          Sorry, registration is now closed.
+        </p>
+      </div>
+    );
+  }
 
   const isOpen = now >= OPEN_TIME;
 

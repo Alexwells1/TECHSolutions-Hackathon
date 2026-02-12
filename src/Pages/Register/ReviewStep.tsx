@@ -135,7 +135,7 @@ export default function ReviewStep() {
           onClick={() => navigate("/register/declarations")}
         >
           Back
-        </Button>
+        </Button>  
         <Button onClick={submit} disabled={!isValid || loading}>
           {loading ? (
             <span className="flex items-center gap-2">
